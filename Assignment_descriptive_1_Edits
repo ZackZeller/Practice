@@ -1,0 +1,117 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## E1:\n",
+    "Given the dataset \"ap\" below,\n",
+    "\n",
+    "1. use the ap.describe() to get the basic statistics<font color='red'>. P</font>rint the result. \n",
+    "2. Explain the meaning of \"count\", \"mean\", \"std\", \"min\", <font color='red'>and</font> \"25\\%\" in the result. \n",
+    "3. Plot the histogram of \"wkd_day_value\" <font color='red'>i.e.</font> ap\\[\"wkd_day_value\"\\]<font color='red'>. I</font>s it skewed?\n",
+    "4. Write a function to calculate skewness <font color='red'>(</font>Skewness = $\\sum_i^N (X_i – X_{mean})^3 / (N-1) * σ^3$).\n",
+    "5. Apply this function to calculate the skewness to the Series ap\\[\"wkd_day_value\"\\].\n",
+    "6. Answer the question: is the distribution of ap\\[\"wkd_day_value\"\\] normal<font color='red'>? Why or why not?</font>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "import pandas as pd\n",
+    "import seaborn as sns\n",
+    "spreadurl = 'https://raw.githubusercontent.com/mengluchu/uncertainty/master/data_vis_exp/DENL17_uc.csv'\n",
+    "# load the data\n",
+    "ap = pd.read_csv(spreadurl).filter (regex=\"pop|nightlight|trop|ele|wind|temp|road|urban|wkd_day_value\") \n",
+    "print(type(ap[\"wkd_day_value\"])) \n",
+    "#ap[\"wkd_day_value\"]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "scrolled": true
+   },
+   "source": [
+    "ap.hist(\"wkd_day_value\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## E2\n",
+    "Given the pair-wise scatterplot for ap_road (below). \n",
+    "\n",
+    "Variable explaination: \n",
+    "\"road_class_2_i\" means primary road length in \"i\" m buffer. i = 50, 500, 5000 in this case.\n",
+    "\"road_class_3_i\" means the same for local roads. \n",
+    "wkd_day_value is the annual average NO2 measurements in $\\mu g / m^3$, for daytime, weekdays.)\n",
+    "\n",
+    "1. Describe what you observed and the information you obtained <font color='red'>in</font> terms of correlations, value distributions, <font color='red'>and</font> categorical variables. \n",
+    "\n",
+    "2. Compare the results between figure 1 and figure 2 (in next chunk)<font color='red'>. G</font>ive <font color='red'>explanations</font> of <font color='red'>your</font> observed differences. \n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "ap_road1 = ap.filter (regex=\"road_class_2_50|wkd_day_value|urbantype_ch\")\n",
+    "g=sns.pairplot(ap_road1, hue = \"urbantype_chara\") # figure 1\n",
+    "g.fig.suptitle(\"figure 1\")\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "ap_road2 = ap.filter (regex=\"road_class_3_50|wkd_day_value|urbantype_ch\")\n",
+    "g = sns.pairplot(ap_road2, hue = \"urbantype_chara\") # figure 2\n",
+    "g.fig.suptitle(\"figure 2\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.7"
+  },
+  "toc": {
+   "base_numbering": 1,
+   "nav_menu": {},
+   "number_sections": true,
+   "sideBar": true,
+   "skip_h1_title": false,
+   "title_cell": "Table of Contents",
+   "title_sidebar": "Contents",
+   "toc_cell": false,
+   "toc_position": {},
+   "toc_section_display": true,
+   "toc_window_display": false
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
